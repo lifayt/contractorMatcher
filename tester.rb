@@ -1,9 +1,11 @@
 
 class Contractor 
 
-	attr_accessor :id, :country, :first_name, :last_name, :lastLogin, :devices
+	attr_accessor :id, :first_name, :last_name, :country, :lastLogin, :devices
 
-	def initialize(id, country, first_name, last_name, lastLogin, devices = {}) 
+	def initialize(id, country, first_name, last_name, lastLogin) 
+		@devices = {}
+
 		@id = id
 
 		@country = country
@@ -13,8 +15,6 @@ class Contractor
 		@last_name = last_name
 
 		@lastLogin = lastLogin
-
-		@devices = devices
 	end 
 
 	def total_bugs
