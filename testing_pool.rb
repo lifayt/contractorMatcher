@@ -1,5 +1,5 @@
 require 'csv'
-require 'tester.rb'
+require_relative 'tester.rb'
 class TestingPool
 
 	attr_accessor :testers, :devices_map
@@ -28,7 +28,6 @@ class TestingPool
 
 	# Inits testers from tester.csv
 	def create_testers
-		@testers_data.shift
 		@testers_data.each do |row|
 			tester_id = row[0]
 			first_name = row[1]
@@ -46,7 +45,7 @@ class TestingPool
 		@devices_data.each do |row|
 			device_id = row[0]
 			device_description = row[1]
-			devices_map[device_id] => device_description
+			devices_map[device_id] = device_description
 		end 
 	end
  
@@ -57,7 +56,7 @@ class TestingPool
 			tester_id = row[0]
 			device_id = row[1]
 			@testers.each do |tester|
-				tester.devices[device_id] = 0
+				tester.devices.push(device_id)
 			end
 		end
 	end
@@ -65,12 +64,12 @@ class TestingPool
 	# Populates the bug class with a list of bugs
 	def associate_bugs
 		@bugs_data.shift
-		@bugs.data.each do |row|
+		@bugs_data.each do |row|
 			bug_id = row[0]
 			device_id = row[1] 
 			tester_id = row[2]
-			@testers.each do |tester|
-				testers.devices[device_id]
+			relevant_tester = @testers.find {|tester| tester.id == tester_id }
+			relevant_tester.bugs.push([bug_id, device_id])
 		end
 	end 
 end

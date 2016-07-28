@@ -1,10 +1,12 @@
 
-class Contractor 
+class Tester 
 
-	attr_accessor :id, :first_name, :last_name, :country, :lastLogin, :devices
+	attr_accessor :id, :first_name, :last_name, :country, :last_login, :devices, :bugs
 
-	def initialize(id, country, first_name, last_name, lastLogin) 
-		@devices = {}
+	def initialize(id, first_name, last_name, country, last_login) 
+		@devices = []
+
+		@bugs = []
 
 		@id = id
 
@@ -14,15 +16,23 @@ class Contractor
 
 		@last_name = last_name
 
-		@lastLogin = lastLogin
+		@last_login = last_login
 	end 
 
+	# @bugs is an array of arrays, where each row is a bug array containing [bug_id, device_id]
 	def total_bugs
-
+		@bugs.length
 	end
 
+	# tabulates total number of bugs for a given device.
 	def device_bugs(device)
-
+		bugs = 0
+		@bugs.each do | row |
+			if row[1] == device
+				bugs += 1
+			end
+		end 
+		return bugs
 	end
 
 end
