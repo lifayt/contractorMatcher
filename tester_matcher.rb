@@ -8,8 +8,9 @@ class TesterMatcher
 	end
 
 	# Takes country shortcuts and an array of device Id's
-	def match(country, devices = [])
-		testers_list = testers.find_all {|testers| testers.country == country and testers.devices.any? {|device| devices.include? (device)}}
+	def match(countries = [], devices = [])
+		testers_list = testers.find_all {|tester| countries.include? (tester.country) and tester.devices.any? {|device| devices.include? (device)}}
+		testers_list.sort_by { |tester| tester.devices_bugs(tester.devices&devices)}.reverse
 	end 
 
 	def testers
@@ -20,15 +21,12 @@ end
 
 matcher = TesterMatcher.new
 
-matcher.testers.each do |tester| 
-	puts tester.id
-	puts tester.first_name
-	puts tester.last_name
-	puts tester.country
-	puts tester.last_login
-	puts tester.devices
-	puts "\n"
-end
-
 puts "Now comes the output ----------\n\n"
-puts matcher.match("US", "1")
+
+country = ["US", "GB"]
+devices = ["1", "5", "6"]
+testers = matcher.match(country, devices)
+
+testers.each do | tester |
+	puts "#{tester.first_name}, #{tester.devices_bugs(tester.devices&devices)}"
+end

@@ -19,16 +19,16 @@ class Tester
 		@last_login = last_login
 	end 
 
-	# @bugs is an array of arrays, where each row is a bug array containing [bug_id, device_id]
+	# @bugs is an array of arrays, where each row is an array of form:[bug_id, device_id]
 	def total_bugs
 		@bugs.length
 	end
 
-	# tabulates total number of bugs for a given device.
-	def device_bugs(device)
+	# tabulates total number of bugs for a given device. Takes singular integer input or array input
+	def devices_bugs(devices)
 		bugs = 0
 		@bugs.each do | row |
-			if row[1] == device
+			if devices.include?(row[1])
 				bugs += 1
 			end
 		end 

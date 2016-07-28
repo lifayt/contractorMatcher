@@ -55,9 +55,8 @@ class TestingPool
 		@testers_device_data.each do |row|
 			tester_id = row[0]
 			device_id = row[1]
-			@testers.each do |tester|
-				tester.devices.push(device_id)
-			end
+			relevant_tester = @testers.find {|tester| tester.id == tester_id }
+			relevant_tester.devices.push(device_id)
 		end
 	end
 
