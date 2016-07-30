@@ -1,12 +1,14 @@
 
 class Tester 
 
-	attr_accessor :id, :first_name, :last_name, :country, :last_login, :devices, :bugs
+	attr_accessor :id, :first_name, :last_name, :country, :last_login, :devices, :bugs, :bugs_per_device
 
 	def initialize(id, first_name, last_name, country, last_login) 
 		@devices = []
 
 		@bugs = []
+
+		@bugs_per_device = 0 
 
 		@id = id
 
@@ -32,6 +34,7 @@ class Tester
 				bugs += 1
 			end
 		end 
+		@bugs_per_device = bugs
 		return bugs
 	end
 

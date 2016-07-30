@@ -28,6 +28,7 @@ class TestingPool
 
 	# Inits testers from tester.csv
 	def create_testers
+		@testers_data.shift
 		@testers_data.each do |row|
 			tester_id = row[0]
 			first_name = row[1]

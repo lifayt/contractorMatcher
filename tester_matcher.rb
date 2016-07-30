@@ -17,16 +17,15 @@ class TesterMatcher
 		@pool.testers
 	end
 
+	def countries
+		countries = []
+		testers.each do |tester|
+			unless countries.include?(tester.country)
+				countries.push(tester.country)
+			end 
+		end 
+		return countries
+	end
+
 end
 
-matcher = TesterMatcher.new
-
-puts "Now comes the output ----------\n\n"
-
-country = ["US", "GB"]
-devices = ["1", "5", "6"]
-testers = matcher.match(country, devices)
-
-testers.each do | tester |
-	puts "#{tester.first_name}, #{tester.devices_bugs(tester.devices&devices)}"
-end
