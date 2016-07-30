@@ -33,6 +33,7 @@
           <div class="col-sm-1">
 
             <select name="country[]" multiple>
+              <option value='All' selected>All</option>
               <% matcher.countries.each do |country| %>
                 <option value='<%= country%>'><%= country %></option>
               <% end %>
@@ -41,6 +42,7 @@
           </div>
           <div class="col-sm-1">
             <select name ="devices[]" multiple>
+              <option value='All' selected>All</option>
               <% matcher.pool.devices_map.each do |key, value| %>
                 <option value='<%= key%>'><%= value %></option>
               <% end %>

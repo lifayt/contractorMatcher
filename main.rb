@@ -13,10 +13,7 @@ post '/search/' do
 
 	devices = params["devices"]
 
-	if countries.nil? or devices.nil?
-		countries = []
-		devices = []
-	end
+	puts "Params: #{params}"
 
 	testers = MATCHER.match(countries, devices)
 

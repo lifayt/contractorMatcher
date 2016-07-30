@@ -8,9 +8,15 @@ class TesterMatcher
 	end
 
 	# Takes country shortcuts and an array of device Id's. Passing an array allows single or multiple selection.
-	def match(countries = [], devices = [])
-		testers_list = testers.find_all {|tester| countries.include? (tester.country) and tester.devices.any? {|device| devices.include? (device)}}
-		testers_list.sort_by { |tester| tester.devices_bugs(tester.devices&devices)}.reverse
+	def match(country_list = [], devices_list = [])
+		return [] if country_list.nil? or devices_list.nil?
+		
+		country_list = countries if country_list.include?("All")
+
+		devices_list = @pool.devices_map.keys if devices_list.include?("All")
+		
+		testers_list = testers.find_all {|tester| country_list.include? (tester.country) and tester.devices.any? {|device| devices_list.include? (device)}}
+		testers_list.sort_by { |tester| tester.devices_bugs(tester.devices&devices_list)}.reverse
 	end 
 
 	def testers
