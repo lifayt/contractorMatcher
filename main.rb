@@ -23,7 +23,7 @@ end
 
 get '/search/' do 
 
-	erb :search, :locals => {'matcher' => MATCHER}
+	erb :search, :locals => {'testers' => [], 'matcher' => MATCHER}
 
 end
 

@@ -7,7 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Tester Matcher</title>
 
-    <link rel="stylesheet" type="text/css" href="<%= url("/style.css")%>">
+    <link rel="stylesheet" type="text/css" href="<%= url("style.css")%>">
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -54,23 +54,32 @@
           </div>
         </form>
         <div class="col-md-8">
-          <% testers.each do |tester| %>
-            <table>
+          <table>
+            <% if testers.size > 0 %>
               <tr>
-                <th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Country</th>
+                <th>Bugs For Selected Devices</th>
+              </tr>
+            <% end %>
+            <% testers.each do |tester| %>
+              <tr>
+                <td>
                 <%= tester.first_name %>
-                </th>
-                <th>
+                </td>
+                <td>
                 <%= tester.last_name %>
-                </th>
-                <th>
+                </td>
+                <td>
                 <%= tester.country %>
-                </th>
-                <th>
+                </td>
+                <td>
                 <%= tester.bugs_per_device %>
-                </th>
-            </table>
-          <% end %>
+                </td>
+              </tr> 
+            <% end %>
+          </table>
         </div>
       </div>
     </div>
