@@ -13,8 +13,6 @@ post '/search/' do
 
 	devices = params["devices"]
 
-	puts "Params: #{params}"
-
 	testers = MATCHER.match(countries, devices)
 
 	erb :search, :locals => {'testers' => testers, 'matcher' => MATCHER}
